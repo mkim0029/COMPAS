@@ -1,2 +1,2 @@
---metallicity 0.007 --evolve-main-sequence-mergers --initial-mass-1 r[0.8,100,0.06] --initial-mass-2 r[0.8,100,0.06] --maximum-evolution-time 800
---metallicity 0.005 --initial-mass-1 r[0.8,100,0.06] --initial-mass-2 r[0.8,100,0.06] --maximum-evolution-time 800
+--metallicity 0.008 --evolve-main-sequence-mergers --initial-mass-min 0.8 --maximum-evolution-time 30 --rotational-velocity-distribution HURLEY --mass-ratio-min 0.1 --orbital-period-max 3162
+--metallicity 0.008 --initial-mass-min 0.8 --maximum-evolution-time 30 --mode SSE --rotational-velocity-distribution HURLEY
