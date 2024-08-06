@@ -1766,6 +1766,8 @@ void BaseBinaryStar::ResolveMainSequenceMerger() {
     m_Star1->UpdateAfterMerger(finalMass, finalHydrogenMass);
     
     m_Star2->SwitchTo(STELLAR_TYPE::MASSLESS_REMNANT);
+
+    m_MassTransfer     = false; // change by MK
 }
 
 
