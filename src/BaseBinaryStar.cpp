@@ -8,17 +8,6 @@
 
 #include <iostream> // change by MK
 
-int counter = 0; // change by MK
-
-// Function to increment the global counter
-void incrementCounter() { // change by MK
-    counter++;
-}
-
-// Function to display the value of the global counter
-void displayCounter() { // change by MK
-    std::cout << "Counter value: " << counter << std::endl;
-}
 
 /* Constructor
  *
@@ -1977,8 +1966,9 @@ void BaseBinaryStar::CalculateWindsMassLoss() {
                     m_Star2->SetMassLossDiff(0.0); // change by MK
                     m_Star2->HaltWinds(); // change by MK
                     double mWinds1 = m_Star1->CalculateMassLossValues(true); // change by MK
-                    std::cout << "\nmWinds1: " << mWinds1 << "\n";
-                    m_Star1->SetMassLossDiff(mWinds1 - m_Star1->Mass());  // change by MK
+                    double massDiff = mWinds1 - m_Star1->Mass();  // change by MK
+                    m_Star1->SetMassLossDiff(massDiff);  // change by MK
+                    m_Star1->UpdateAttributes(massDiff, 0.0, true);  // change by MK
                 }
             else { // change by MK
             double mWinds1 = m_Star1->CalculateMassLossValues(true);                                                            // calculate new values assuming mass loss applied
