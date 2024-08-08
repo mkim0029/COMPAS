@@ -6,6 +6,19 @@
 // gsl includes
 #include <gsl/gsl_poly.h>
 
+#include <iostream> // change by MK
+
+int counter = 0; // change by MK
+
+// Function to increment the global counter
+void incrementCounter() { // change by MK
+    counter++;
+}
+
+// Function to display the value of the global counter
+void displayCounter() { // change by MK
+    std::cout << "Counter value: " << counter << std::endl;
+}
 
 /* Constructor
  *
@@ -1767,7 +1780,6 @@ void BaseBinaryStar::ResolveMainSequenceMerger() {
     
     m_Star2->SwitchTo(STELLAR_TYPE::MASSLESS_REMNANT);
 
-    m_MassTransfer     = false; // change by MK
 }
 
 
@@ -1944,6 +1956,11 @@ double BaseBinaryStar::CalculateZetaRocheLobe(const double p_jLoss, const double
  */
 void BaseBinaryStar::CalculateWindsMassLoss() {
 
+    if (m_Star2->IsOneOf({ STELLAR_TYPE::MASSLESS_REMNANT })) {
+        //std::cout << "\nm_MassTransfer: " << m_MassTransfer << "\n"; // change by MK
+        m_MassTransfer        = false; // change by MK
+    }
+
     m_aMassLossDiff = 0.0;                                                                                                      // initially - no change to orbit (semi-major axis) due to winds mass loss
 
     // Halt mass loss due to winds if the binary is in mass transfer and set the Mdot parameters of both stars appropriately
@@ -1956,6 +1973,14 @@ void BaseBinaryStar::CalculateWindsMassLoss() {
     else {
         if (OPTIONS->UseMassLoss()) {                                                                                           // mass loss enabled?
 
+            if (m_Star2->IsOneOf({ STELLAR_TYPE::MASSLESS_REMNANT })) { // change by MK
+                    m_Star2->SetMassLossDiff(0.0); // change by MK
+                    m_Star2->HaltWinds(); // change by MK
+                    double mWinds1 = m_Star1->CalculateMassLossValues(true); // change by MK
+                    std::cout << "\nmWinds1: " << mWinds1 << "\n";
+                    m_Star1->SetMassLossDiff(mWinds1 - m_Star1->Mass());  // change by MK
+                }
+            else { // change by MK
             double mWinds1 = m_Star1->CalculateMassLossValues(true);                                                            // calculate new values assuming mass loss applied
             double mWinds2 = m_Star2->CalculateMassLossValues(true);                                                            // calculate new values assuming mass loss applied
 
@@ -1964,7 +1989,8 @@ void BaseBinaryStar::CalculateWindsMassLoss() {
             m_Star1->SetMassLossDiff(mWinds1 - m_Star1->Mass());                                                                // JR: todo: find a better way?
             m_Star2->SetMassLossDiff(mWinds2 - m_Star2->Mass());                                                                // JR: todo: find a better way?
 
-            m_aMassLossDiff = aWinds - m_SemiMajorAxisPrev;                                                                     // change to orbit (semi-major axis) due to winds mass loss
+            m_aMassLossDiff = aWinds - m_SemiMajorAxisPrev; 
+            }                                                                    // change to orbit (semi-major axis) due to winds mass loss
         }
     }
 }
