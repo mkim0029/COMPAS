@@ -23,7 +23,7 @@ Thumbs.db
 __pycache__/
 *.coverage
 test_artifacts/
-
+*.h5
 COMPAS
 *.log
 *.aux
