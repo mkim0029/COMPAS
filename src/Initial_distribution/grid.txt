@@ -1,6 +1,11 @@
 COMPAS_Output_M0.8to6_80Myr.h5: --metallicity 0.008 --evolve-main-sequence-mergers --initial-mass-1 r[0.8,100,0.052] --initial-mass-2 r[0.8,100,0.052] --maximum-evolution-time 80 --semi-major-axis-max 0.1 --semi-major-axis-min 0.001
 COMPAS_Output_M0.8to3to6_80Myr.h5: --metallicity 0.008 --evolve-main-sequence-mergers --initial-mass-1 r[3,100,0.03] --initial-mass-2 r[0.8,100,0.022] --maximum-evolution-time 80 --semi-major-axis-max 0.1 --semi-major-axis-min 0.001
-COMPAS_Output_sampled: ./COMPAS --logfile-definitions Log_Output_Definitions.txt --grid my_grid.txt --metallicity 0.008 --maximum-evolution-time 80
+COMPAS_Output_sampled: ./COMPAS --logfile-definitions Log_Output_Definitions.txt --grid my_grid.txt --metallicity 0.008 --maximum-evolution-time 80 --evolve-main-sequence-mergers
     my_grid: python3 sampleMoeDiStefano.py --gridname my_grid.txt --nSamples 10000 --m1Min 0.8 --m1Max 6 --testing False
-OMPAS_Output_sampled_5Gyr: ./COMPAS --logfile-definitions Log_Output_Definitions.txt --grid my_grid.txt --metallicity 0.008 --maximum-evolution-time 80 --maximum-evolution-time 5000
- 
+COMPAS_Output_sampled_5Gyr: ./COMPAS --logfile-definitions Log_Output_Definitions.txt --grid my_grid.txt --metallicity 0.008 --maximum-evolution-time 5000 --evolve-main-sequence-mergers
+COMPAS_Output_sampled_10Gyr: ./COMPAS --logfile-definitions Log_Output_Definitions.txt --grid my_grid.txt --metallicity 0.008 --maximum-evolution-time 10000 --evolve-main-sequence-mergers
+COMPAS_Output_sampled_80Myr: ./COMPAS --logfile-definitions Log_Output_Definitions.txt --grid new_my_grid.txt --maximum-evolution-time 80 --evolve-main-sequence-mergers
+COMPAS_Output_sampled_M3to7: ./COMPAS --logfile-definitions Log_Output_Definitions.txt --grid my_grid_M3to7.txt --metallicity 0.008 --maximum-evolution-time 80 --evolve-main-sequence-mergers
+    my_grid_M3to7: python3 sampleMoeDiStefano.py --gridname my_grid_M3to7.txt --nSamples 10000 --m1Min 3 --m1Max 7 --testing True
+COMPAS_Output_sampled_M3to7_0.1mil: ./COMPAS --logfile-definitions Log_Output_Definitions.txt --grid my_grid_M3to7_0.1mil.txt --metallicity 0.008 --maximum-evolution-time 80 --evolve-main-sequence-mergers
+    my_grid_M3to7_0.1mil: python3 sampleMoeDiStefano.py --gridname my_grid_M3to7.txt --nSamples 100000 --m1Min 3 --m1Max 7 --testing True
