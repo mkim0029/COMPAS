@@ -1,1 +1,1 @@
---metallicity 0.008 --evolve-main-sequence-mergers --initial-mass-1 r[3,100,0.03] --initial-mass-2 r[0.8,100,0.022] --maximum-evolution-time 80 --semi-major-axis-max 0.1 --semi-major-axis-min 0.001
+--metallicity 0.008 --evolve-main-sequence-mergers --initial-mass-1 1 --initial-mass-2 0.7 --semi-major-axis r[0.00001,100,0.00025]
