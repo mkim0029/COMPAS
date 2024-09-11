@@ -1,5 +1,5 @@
 
-COMPAS v02.50.01
+COMPAS v03.00.02
 Compact Object Mergers: Population Astrophysics and Statistics
 by Team COMPAS (http://compas.science/index.html)
 A binary star simulator
@@ -7,27 +7,32 @@ A binary star simulator
 Go to https://compas.readthedocs.io/en/latest/index.html for the online documentation
 Check https://compas.readthedocs.io/en/latest/pages/whats-new.html to see what's new in the latest release
 
-Start generating binaries at Tue Sep 10 12:20:40 2024
+Start generating binaries at Wed Sep 11 15:07:57 2024
 
-Generated 150 of 150 binaries requested
+Generated 110 of 110 binaries requested
 
-End generating binaries at Tue Sep 10 12:24:19 2024
+End generating binaries at Wed Sep 11 15:09:11 2024
 
-Clock time = 219.274 CPU seconds
-Wall time  = 0000:03:39 (hhhh:mm:ss)
+Clock time = 74.3339 CPU seconds
+Wall time  = 0000:01:14 (hhhh:mm:ss)
 
 
 COMMAND LINE OPTIONS
 --------------------
 
+LBV-mass-loss-prescription = 'HURLEY_ADD', DEFAULT_USED, STRING
 OB-mass-loss = 'VINK2021', DEFAULT_USED, STRING
+OB-mass-loss-prescription = 'VINK2021', DEFAULT_USED, STRING
 PISN-lower-limit = 60.000000, DEFAULT_USED, DOUBLE
 PISN-upper-limit = 135.000000, DEFAULT_USED, DOUBLE
 PPI-lower-limit = 35.000000, DEFAULT_USED, DOUBLE
 PPI-upper-limit = 60.000000, DEFAULT_USED, DOUBLE
 RSG-mass-loss = 'DECIN2023', DEFAULT_USED, STRING
+RSG-mass-loss-prescription = 'DECIN2023', DEFAULT_USED, STRING
 VMS-mass-loss = 'SABHAHIT2023', DEFAULT_USED, STRING
+VMS-mass-loss-prescription = 'SABHAHIT2023', DEFAULT_USED, STRING
 WR-mass-loss = 'SANDERVINK2023', DEFAULT_USED, STRING
+WR-mass-loss-prescription = 'SANDERVINK2023', DEFAULT_USED, STRING
 YAML-template = '', DEFAULT_USED, STRING
 add-options-to-sysparms = 'GRID', DEFAULT_USED, STRING
 allow-non-stripped-ECSN = FALSE, DEFAULT_USED, BOOL
@@ -35,9 +40,11 @@ allow-rlof-at-birth = TRUE, DEFAULT_USED, BOOL
 allow-touching-at-birth = FALSE, DEFAULT_USED, BOOL
 angular-momentum-conservation-during-circularisation = FALSE, DEFAULT_USED, BOOL
 black-hole-kicks = 'FALLBACK', DEFAULT_USED, STRING
+black-hole-kicks-mode = 'FALLBACK', DEFAULT_USED, STRING
 case-BB-stability-prescription = 'ALWAYS_STABLE', DEFAULT_USED, STRING
 check-photon-tiring-limit = FALSE, DEFAULT_USED, BOOL
 chemically-homogeneous-evolution = 'PESSIMISTIC', DEFAULT_USED, STRING
+chemically-homogeneous-evolution-mode = 'PESSIMISTIC', DEFAULT_USED, STRING
 circularise-binary-during-mass-transfer = TRUE, DEFAULT_USED, BOOL
 common-envelope-allow-immediate-RLOF-post-CE-survive = FALSE, DEFAULT_USED, BOOL
 common-envelope-allow-main-sequence-survive = TRUE, DEFAULT_USED, BOOL
@@ -96,6 +103,7 @@ evolve-pulsars = FALSE, DEFAULT_USED, BOOL
 evolve-unbound-systems = TRUE, DEFAULT_USED, BOOL
 expel-convective-envelope-above-luminosity-threshold = FALSE, DEFAULT_USED, BOOL
 fix-dimensionless-kick-magnitude = -1.000000, DEFAULT_USED, DOUBLE
+fp-error-mode = 'OFF', DEFAULT_USED, STRING
 fryer-22-fmix = 0.500000, DEFAULT_USED, DOUBLE
 fryer-22-mcrit = 5.750000, DEFAULT_USED, DOUBLE
 fryer-supernova-engine = 'DELAYED', DEFAULT_USED, STRING
@@ -114,6 +122,7 @@ initial-mass-max = 150.000000, DEFAULT_USED, DOUBLE
 initial-mass-min = 5.000000, DEFAULT_USED, DOUBLE
 initial-mass-power = 0.000000, DEFAULT_USED, DOUBLE
 kick-direction = 'ISOTROPIC', DEFAULT_USED, STRING
+kick-direction-distribution = 'ISOTROPIC', DEFAULT_USED, STRING
 kick-direction-power = 0.000000, DEFAULT_USED, DOUBLE
 kick-magnitude = 0.000000, DEFAULT_USED, DOUBLE
 kick-magnitude-1 = 0.000000, DEFAULT_USED, DOUBLE
@@ -173,6 +182,7 @@ mass-transfer-jloss-macleod-linear-fraction-non-degen = 0.500000, DEFAULT_USED, 
 mass-transfer-rejuvenation-prescription = 'STARTRACK', DEFAULT_USED, STRING
 mass-transfer-thermal-limit-C = 10.000000, DEFAULT_USED, DOUBLE
 mass-transfer-thermal-limit-accretor = 'CFACTOR', DEFAULT_USED, STRING
+mass-transfer-thermal-limit-accretor-multiplier = 'CFACTOR', DEFAULT_USED, STRING
 maximum-evolution-time = 13700.000000, DEFAULT_USED, DOUBLE
 maximum-mass-donor-nandez-ivanova = 2.000000, DEFAULT_USED, DOUBLE
 maximum-neutron-star-mass = 2.500000, DEFAULT_USED, DOUBLE
@@ -243,6 +253,7 @@ tides-prescription = 'NONE', DEFAULT_USED, STRING
 timestep-multiplier = 1.000000, DEFAULT_USED, DOUBLE
 timesteps-filename = '', DEFAULT_USED, STRING
 use-mass-loss = TRUE, DEFAULT_USED, BOOL
+use-mass-transfer = TRUE, DEFAULT_USED, BOOL
 version = FALSE, DEFAULT_USED, BOOL
 wolf-rayet-multiplier = 1.000000, DEFAULT_USED, DOUBLE
 zeta-adiabatic-arbitrary = 10000.000000, DEFAULT_USED, DOUBLE
@@ -255,6 +266,6 @@ OTHER PARAMETERS
 
 useFixedUK = FALSE, CALCULATED, BOOL
 fixedRandomSeed = FALSE, CALCULATED, BOOL
-actual-output-path = /home/minjihkim/COMPAS/src, CALCULATED, STRING
-actual-output-container = COMPAS_Output_1, CALCULATED, STRING
-actual-random-seed = 1725934840, CALCULATED, UNSIGNED_LONG
+actual-output-path = /home/minjih/2024/Honours/COMPAS/src, CALCULATED, STRING
+actual-output-container = COMPAS_Output, CALCULATED, STRING
+actual-random-seed = 1726031277, CALCULATED, UNSIGNED_LONG
