@@ -1,2 +1,1 @@
---metallicity 0.008 --evolve-main-sequence-mergers --initial-mass-1 1 --initial-mass-2 0.7 --semi-major-axis r[0.00001,100,0.01] --allow-touching-at-birth
---metallicity 0.008 --evolve-main-sequence-mergers --initial-mass-1 1 --initial-mass-2 0.7 --semi-major-axis r[1,10,1] --allow-touching-at-birth
+--metallicity 0.008 --evolve-main-sequence-mergers --initial-mass-1 1 --initial-mass-2 0.7 --semi-major-axis r[0.00001,100,0.00025] --allow-touching-at-birth
