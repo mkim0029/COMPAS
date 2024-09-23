@@ -5,6 +5,7 @@
 #include "Rand.h"
 #include "BaseStar.h"
 #include "vector3d.h"
+#include "BH.h"
 
 // boost includes
 #include <boost/math/distributions.hpp>
@@ -1990,7 +1991,7 @@ double BaseStar::CalculateMassLossRateWolfRayetZDependent(const double p_Mu) con
     // TW - Haven't seen StarTrack but I think H&K gives the original equation and V&dK gives the Z dependence
     double rate = 0.0;
     if (utils::Compare(p_Mu, 1.0) < 0) {
-        rate = OPTIONS->WolfRayetFactor() * 1.0E-13 * PPOW(m_Luminosity, 1.5) * PPOW(m_Metallicity / ZSOL, 0.86) * (1.0 - p_Mu);
+        rate = 1.0E-13 * PPOW(m_Luminosity, 1.5) * PPOW(m_Metallicity / ZSOL, 0.86) * (1.0 - p_Mu);
     }
     return rate;
 }
@@ -2325,7 +2326,7 @@ double BaseStar::CalculateMassLossRateVMSVink2011() const {
  *
  * @return                                      Mass loss rate in Msol yr^-1
  */
-double BaseStar::CalculateMassLossRateVMSSabhahit2023() const {
+double BaseStar::CalculateMassLossRateVMSSabhahit2023() {
 
     double gamma       = EDDINGTON_PARAMETER_FACTOR * m_Luminosity / m_Mass;                                    // Eddington Parameter, independent of surface composition
     double Mswitch     = PPOW(m_Metallicity, -1.574) * 0.0615 + 18.10;                                          // obtained from a powerlaw fit to table 2, given teff=45kK
@@ -2338,7 +2339,7 @@ double BaseStar::CalculateMassLossRateVMSSabhahit2023() const {
         Mdot = Mdotswitch * PPOW((m_Luminosity / Lswitch) , 4.77) * PPOW((m_Mass/Mswitch) , -3.99);
     }
     else {
-        Mdot = CalculateMassLossRateOBVink2001();
+        Mdot = CalculateMassLossRateOB(OPTIONS->OBMassLossPrescription());                                      // not in the VMS regime according to Sabhahit+ 2023, fall back to default OB mass loss prescription
     }
 
     return Mdot;
@@ -2497,7 +2498,7 @@ double BaseStar::CalculateMassLossRateWolfRayetSanderVink2020(const double p_Mu)
         if (utils::Compare(logL0, logL) <= 0) {                                                             // No mass loss for L < L0
             // Equation 13 in Sander & Vink 2020
             double logMdot = alpha * log10(logL - logL0) + 0.75 * (logL - logL0 - 1.0) + logMdot10;
-            Mdot           = PPOW(10.0, logMdot) * OPTIONS->WolfRayetFactor();
+            Mdot           = PPOW(10.0, logMdot);
         }
     }
 
@@ -2607,7 +2608,7 @@ double BaseStar::CalculateMassLossRateHurley() {
 
 /*
  * Calculate the dominant mass loss mechanism and associated rate for the star at the current evolutionary phase
- * According to Vink - based on implementation in StarTrack 
+ * Follows the implementation in StarTrack
  *
  * 
  * double CalculateMassLossRateBelczynski2010()
@@ -2643,20 +2644,20 @@ double BaseStar::CalculateMassLossRateBelczynski2010() {
 
 
 /*
- * Calculate the mass loss rate according to the updated prescription. 
+ * Calculate the mass loss rate according to the updated framework.
  *
- * The structure is similar to the Vink wrapper (previous default), which should be called Belczynski.
- * Mass loss rates for hot, massive OB stars are given by Bjorklund et al. 2022
- * Mass loss rates for helium rich Wolf--Rayet stars are given by Sander (not yet implemented)
- * Mass loss rates for red supergiants are given by Beasor and Davies (not yet implemented)
- * Mass loss rates for luminous blue variables are still given as defined elsewhere in the code
+ * The structure is similar to the CalculateMassLossRateBelczynski2010() wrapper (previous default).
+ * Mass loss rates are divided into several classes: RSG winds, cool star winds,
+ * very massive star (VMS) winds, OB star winds.
+ * Furthermore, LBV winds are computed separately, and, if non-zero, either replace other mass loss
+ * or are added to other wind mass loss if LBV_MASS_LOSS_PRESCRIPTION::HURLEY_ADD is used.
  * 
  *
- * double CalculateMassLossRateFlexible2023()
+ * double CalculateMassLossRateMerritt2024()
  * 
  * @return                  Mass loss rate in Msol per year
  */
-double BaseStar::CalculateMassLossRateFlexible2023() {
+double BaseStar::CalculateMassLossRateMerritt2024() {
 
     m_DominantMassLossRate = MASS_LOSS_TYPE::NONE;
 
@@ -2670,7 +2671,7 @@ double BaseStar::CalculateMassLossRateFlexible2023() {
 
         if ((utils::Compare(teff, RSG_MAXIMUM_TEMP) < 0) &&                                                         // teff < max temp for RSG winds?
             (utils::Compare(m_MZAMS, MASSIVE_THRESHOLD) >= 0) &&                                                    // ZAMS mass at or above massive threshold?
-            IsOneOf(GIANTS)) {                                                                                      // core helium burning giant(CHeB, FGB, EAGB, TPAGB)?
+            (IsOneOf(GIANTS) || m_StellarType == STELLAR_TYPE::HERTZSPRUNG_GAP)) {                                  // must be core helium burning giant(CHeB, FGB, EAGB, TPAGB), or HG
             otherWindsRate         = CalculateMassLossRateRSG(OPTIONS->RSGMassLossPrescription());                  // yes - use RSG mass loss rate
             m_DominantMassLossRate = MASS_LOSS_TYPE::RSG;                                                           // set dominant mass loss rate
         }                                                                      
@@ -2734,8 +2735,8 @@ double BaseStar::CalculateMassLossRate() {
                 mDot = CalculateMassLossRateBelczynski2010();
                 break;
 
-            case MASS_LOSS_PRESCRIPTION::FLEXIBLE2023:
-                mDot = CalculateMassLossRateFlexible2023();
+            case MASS_LOSS_PRESCRIPTION::MERRITT2024:
+                mDot = CalculateMassLossRateMerritt2024();
                 break;
 
             default:                                                                                                // unknown prescription
@@ -2746,7 +2747,7 @@ double BaseStar::CalculateMassLossRate() {
                 // The correct fix for this is to add code for the missing prescription or, if the missing
                 // prescription is superfluous, remove it from the option.
 
-                THROW_ERROR(ERROR::UNKNOWN_VMS_MASS_LOSS_PRESCRIPTION);                                             // throw error
+                THROW_ERROR(ERROR::UNKNOWN_MASS_LOSS_PRESCRIPTION);                                                 // throw error
         }
 
         mDot = mDot * OPTIONS->OverallWindMassLossMultiplier();                                                     // apply overall wind mass loss multiplier
@@ -4220,8 +4221,8 @@ double BaseStar::CalculateSNKickMagnitude(const double p_RemnantMass, const doub
                                                                                                     // no errors
         m_SupernovaDetails.drawnKickMagnitude = vK;                                                 // drawn kick magnitude
 
-        if (thisSNevent == SN_EVENT::CCSN) {                                                        // core-collapse supernova event this timestep?
-            vK = ReweightSupernovaKickByMass(vK, m_SupernovaDetails.fallbackFraction, m_Mass);      // yes - re-weight kick by mass of remnant according to user specified black hole kicks option, if relevant (default is no reweighting)
+        if (thisSNevent == SN_EVENT::CCSN && utils::IsOneOf(p_StellarType, { STELLAR_TYPE::BLACK_HOLE })) { // core-collapse supernova event this timestep, and remnant is black hole?
+            vK = BH::ReweightSupernovaKickByMass_Static(vK, m_SupernovaDetails.fallbackFraction, m_Mass);   // yes - re-weight kick by mass of remnant according to user specified black hole kicks option, if relevant (default is no reweighting)
         }
         else {                                                                                      // otherwise
             m_SupernovaDetails.fallbackFraction = 0.0;                                              // set fallback fraction to zero

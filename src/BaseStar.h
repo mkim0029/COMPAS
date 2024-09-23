@@ -576,10 +576,10 @@ protected:
             double              CalculateMassLossRateVassiliadisWood() const;
             double              CalculateMassLossRateVMS(const VMS_MASS_LOSS_PRESCRIPTION p_VMS_mass_loss);
             double              CalculateMassLossRateVMSBestenlehner2020() const;
-            double              CalculateMassLossRateVMSSabhahit2023() const;
+            double              CalculateMassLossRateVMSSabhahit2023();
             double              CalculateMassLossRateVMSVink2011() const;
     virtual double              CalculateMassLossRateBelczynski2010();
-    virtual double              CalculateMassLossRateFlexible2023();
+    virtual double              CalculateMassLossRateMerritt2024();
             double              CalculateMassLossRateWolfRayetZDependent(const double p_Mu) const;
             double              CalculateMassLossRateWolfRayet(const double p_Mu) const;
             double              CalculateMassLossRateWolfRayetSanderVink2020(const double p_Mu) const;

@@ -128,7 +128,6 @@ enum class ERROR: int {
     TOO_MANY_OMEGA_ITERATIONS,                                      // too many iterations in OMEGA root finder
     TOO_MANY_OMEGA_TRIES,                                           // too many tries in OMEGA root finder
     TOO_MANY_PULSAR_SPIN_ITERATIONS,                                // too many iterations calculating the pulsar birth spin period
-    TOO_MANY_REMNANT_MASS_ITERATIONS,                               // too many iterations to calculate remnant mass (MULLERMANDEL)
     TOO_MANY_RETRIES,                                               // generic too many retries
     TOO_MANY_RLOF_ITERATIONS,                                       // too many iterations in RLOF root finder
     TOO_MANY_RLOF_TRIES,                                            // too many tries in RLOF root finder
@@ -193,8 +192,6 @@ enum class ERROR: int {
     UNKNOWN_VROT_PRESCRIPTION,                                      // unknown rorational velocity prescription
     UNKNOWN_WR_MASS_LOSS_PRESCRIPTION,                              // unknown WR mass loss prescription
     UNKNOWN_ZETA_PRESCRIPTION,                                      // unknown stellar ZETA prescription
-    UNSUPPORTED_PULSAR_BIRTH_MAGNETIC_FIELD_DISTRIBUTION,           // unsupported pulsar birth magnetic field distribution
-    UNSUPPORTED_PULSAR_BIRTH_SPIN_PERIOD_DISTRIBUTION,              // unsupported pulsar birth spin period distribution
     WARNING,                                                        // unspecified warning
     WHITE_DWARF_TOO_MASSIVE,                                        // a white dwarf exceeds the Chandrasekhar mass limit
 
@@ -303,7 +300,6 @@ const COMPASUnorderedMap<ERROR, std::tuple<ERROR_SCOPE, std::string>> ERROR_CATA
     { ERROR::TOO_MANY_OMEGA_ITERATIONS,                             { ERROR_SCOPE::ALWAYS,              "Reached maximum number of iterations when looking for omega when circularising and synchronising for tides" }},
     { ERROR::TOO_MANY_OMEGA_TRIES,                                  { ERROR_SCOPE::ALWAYS,              "Reached maximum number of tries when looking for omega when circularising and synchronising for tides" }},
     { ERROR::TOO_MANY_PULSAR_SPIN_ITERATIONS,                       { ERROR_SCOPE::ALWAYS,              "Reached maximum number of iterations calculating the pulsar birth spin period" }},
-    { ERROR::TOO_MANY_REMNANT_MASS_ITERATIONS,                      { ERROR_SCOPE::ALWAYS,              "Reached maximum number of iterations when calcuating remnant mass (MULLERMANDEL)" }},
     { ERROR::TOO_MANY_RETRIES,                                      { ERROR_SCOPE::ALWAYS,              "Too many retries" }},
     { ERROR::TOO_MANY_RLOF_ITERATIONS,                              { ERROR_SCOPE::ALWAYS,              "Reached maximum number of iterations when fitting star inside Roche Lobe in RLOF" }},
     { ERROR::TOO_MANY_RLOF_TRIES,                                   { ERROR_SCOPE::ALWAYS,              "Reached maximum number of tries when fitting star inside Roche Lobe in RLOF" }},
@@ -367,8 +363,6 @@ const COMPASUnorderedMap<ERROR, std::tuple<ERROR_SCOPE, std::string>> ERROR_CATA
     { ERROR::UNKNOWN_VMS_MASS_LOSS_PRESCRIPTION,                    { ERROR_SCOPE::ALWAYS,              "Unknown VMS mass loss prescription" }},
     { ERROR::UNKNOWN_VROT_PRESCRIPTION,                             { ERROR_SCOPE::ALWAYS,              "Unknown rotational velocity prescription" }},
     { ERROR::UNKNOWN_ZETA_PRESCRIPTION,                             { ERROR_SCOPE::ALWAYS,              "Unknown stellar ZETA prescription" }},
-    { ERROR::UNSUPPORTED_PULSAR_BIRTH_MAGNETIC_FIELD_DISTRIBUTION,  { ERROR_SCOPE::ALWAYS,              "Unsupported pulsar birth magnetic field distribution" }},
-    { ERROR::UNSUPPORTED_PULSAR_BIRTH_SPIN_PERIOD_DISTRIBUTION,     { ERROR_SCOPE::ALWAYS,              "Unsupported pulsar birth spin period distribution" }},
     { ERROR::WARNING,                                               { ERROR_SCOPE::ALWAYS,              "Warning!" }},
     { ERROR::WHITE_DWARF_TOO_MASSIVE,                               { ERROR_SCOPE::ALWAYS,              "This white dwarf exceeds the Chandrasekhar mass limit" }},
     { ERROR::UNKNOWN_WR_MASS_LOSS_PRESCRIPTION,                     { ERROR_SCOPE::ALWAYS,              "Unknown WR mass loss prescription" }}
