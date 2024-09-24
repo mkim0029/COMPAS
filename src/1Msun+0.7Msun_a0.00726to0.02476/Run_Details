@@ -1,5 +1,5 @@
 
-COMPAS v03.00.02
+COMPAS v03.02.01
 Compact Object Mergers: Population Astrophysics and Statistics
 by Team COMPAS (http://compas.science/index.html)
 A binary star simulator
@@ -7,14 +7,14 @@ A binary star simulator
 Go to https://compas.readthedocs.io/en/latest/index.html for the online documentation
 Check https://compas.readthedocs.io/en/latest/pages/whats-new.html to see what's new in the latest release
 
-Start generating binaries at Thu Sep 12 10:11:00 2024
+Start generating binaries at Tue Sep 24 15:22:41 2024
 
 Generated 100 of 100 binaries requested
 
-End generating binaries at Thu Sep 12 10:13:34 2024
+End generating binaries at Tue Sep 24 15:28:35 2024
 
-Clock time = 154.542 CPU seconds
-Wall time  = 0000:02:34 (hhhh:mm:ss)
+Clock time = 352.749 CPU seconds
+Wall time  = 0000:05:53 (hhhh:mm:ss)
 
 
 COMMAND LINE OPTIONS
@@ -25,6 +25,7 @@ OB-mass-loss = 'VINK2021', DEFAULT_USED, STRING
 OB-mass-loss-prescription = 'VINK2021', DEFAULT_USED, STRING
 PISN-lower-limit = 60.000000, DEFAULT_USED, DOUBLE
 PISN-upper-limit = 135.000000, DEFAULT_USED, DOUBLE
+PPI-CO-Core-Shift-Hendriks = 0.000000, DEFAULT_USED, DOUBLE
 PPI-lower-limit = 35.000000, DEFAULT_USED, DOUBLE
 PPI-upper-limit = 60.000000, DEFAULT_USED, DOUBLE
 RSG-mass-loss = 'DECIN2023', DEFAULT_USED, STRING
@@ -94,6 +95,7 @@ eccentricity-distribution = 'ZERO', DEFAULT_USED, STRING
 eccentricity-max = 1.000000, DEFAULT_USED, DOUBLE
 eccentricity-min = 0.000000, DEFAULT_USED, DOUBLE
 eddington-accretion-factor = 1.000000, DEFAULT_USED, DOUBLE
+emit-gravitational-radiation = FALSE, DEFAULT_USED, BOOL
 enable-warnings = FALSE, DEFAULT_USED, BOOL
 envelope-state-prescription = 'LEGACY', DEFAULT_USED, STRING
 errors-to-file = FALSE, DEFAULT_USED, BOOL
@@ -114,6 +116,7 @@ hdf5-buffer-size = 1, DEFAULT_USED, SIGNED
 hdf5-chunk-size = 100000, DEFAULT_USED, SIGNED
 help = FALSE, DEFAULT_USED, BOOL
 hmxr-binaries = FALSE, DEFAULT_USED, BOOL
+include-WD-binaries-as-DCO = FALSE, DEFAULT_USED, BOOL
 initial-mass = 5.000000, DEFAULT_USED, DOUBLE
 initial-mass-1 = 5.000000, DEFAULT_USED, DOUBLE
 initial-mass-2 = 5.000000, DEFAULT_USED, DOUBLE
@@ -167,7 +170,7 @@ luminosity-to-mass-threshold = 4.200000, DEFAULT_USED, DOUBLE
 luminous-blue-variable-multiplier = 1.500000, DEFAULT_USED, DOUBLE
 luminous-blue-variable-prescription = 'HURLEY_ADD', DEFAULT_USED, STRING
 mass-change-fraction = 0.000000, DEFAULT_USED, DOUBLE
-mass-loss-prescription = 'FLEXIBLE2023', DEFAULT_USED, STRING
+mass-loss-prescription = 'MERRITT2024', DEFAULT_USED, STRING
 mass-ratio = 1.000000, DEFAULT_USED, DOUBLE
 mass-ratio-distribution = 'FLAT', DEFAULT_USED, STRING
 mass-ratio-max = 1.000000, DEFAULT_USED, DOUBLE
@@ -266,6 +269,6 @@ OTHER PARAMETERS
 
 useFixedUK = FALSE, CALCULATED, BOOL
 fixedRandomSeed = FALSE, CALCULATED, BOOL
-actual-output-path = /home/minjih/2024/Honours/COMPAS/src, CALCULATED, STRING
+actual-output-path = /home/minjihkim/COMPAS/src, CALCULATED, STRING
 actual-output-container = COMPAS_Output, CALCULATED, STRING
-actual-random-seed = 1726099860, CALCULATED, UNSIGNED_LONG
+actual-random-seed = 1727155361, CALCULATED, UNSIGNED_LONG
