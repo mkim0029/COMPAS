@@ -1,5 +1,5 @@
 
-COMPAS v03.03.02
+COMPAS v03.04.00
 Compact Object Mergers: Population Astrophysics and Statistics
 by Team COMPAS (http://compas.science/index.html)
 A binary star simulator
@@ -7,14 +7,14 @@ A binary star simulator
 Go to https://compas.readthedocs.io/en/latest/index.html for the online documentation
 Check https://compas.readthedocs.io/en/latest/pages/whats-new.html to see what's new in the latest release
 
-Start generating binaries at Mon Sep 30 16:45:06 2024
+Start generating binaries at Wed Oct  2 11:28:00 2024
 
 Generated 100 of 100 binaries requested
 
-End generating binaries at Mon Sep 30 16:50:51 2024
+End generating binaries at Wed Oct  2 11:33:46 2024
 
-Clock time = 344.104 CPU seconds
-Wall time  = 0000:05:44 (hhhh:mm:ss)
+Clock time = 346.314 CPU seconds
+Wall time  = 0000:05:46 (hhhh:mm:ss)
 
 
 COMMAND LINE OPTIONS
@@ -274,5 +274,5 @@ OTHER PARAMETERS
 useFixedUK = FALSE, CALCULATED, BOOL
 fixedRandomSeed = FALSE, CALCULATED, BOOL
 actual-output-path = /home/minjihkim/COMPAS/src, CALCULATED, STRING
-actual-output-container = COMPAS_Output, CALCULATED, STRING
-actual-random-seed = 1727678706, CALCULATED, UNSIGNED_LONG
+actual-output-container = COMPAS_Output_1, CALCULATED, STRING
+actual-random-seed = 1727832480, CALCULATED, UNSIGNED_LONG
