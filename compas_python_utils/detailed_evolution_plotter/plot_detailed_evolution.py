@@ -329,7 +329,7 @@ def plotVanDenHeuvel(events=None, outdir='.'):
 
         pad = 5
         axs[ii].annotate(pltString, xy=(0, 0.5), xytext=(-axs[ii].yaxis.labelpad + pad, 0),
-                         xycoords=axs[ii].yaxis.label, fontsize=8, textcoords='offset points', ha='left', va='center')
+                         xycoords=axs[ii].yaxis.label, fontsize=12, textcoords='offset points', ha='left', va='center')  #------------change by MK, fontsize
         axs[ii].annotate(chr(ord('@') + 1 + ii), xy=(-0.15, 0.8), xycoords='axes fraction', fontsize=8,
                          fontweight='bold')
 
@@ -567,7 +567,16 @@ class Event(object):
             else:
                 eventString = r'Evolution ended by run duration: {}+{}'.format(self.stypeName1, self.stypeName2)
                 image_num = 2
-
+        #--------------------------------change by MK
+        elif eventClass == 'Overcontact':
+            image_num = 10
+            eventString = 'Zero-age main-sequence, metallicity Z={:5.4f}\nOvercontact binary'.format(self.Z1)
+        elif eventClass == 'ZAMSmerger':
+            self.eventClass = 'Beg'
+            self.endState = 'Merger'
+            eventString = 'Zero-age main-sequence, metallicity Z={:5.4f}\nStellar Merger: {}+{}'.format(self.Z1, self.stypeName1, self.stypeName2)
+            image_num = 37
+        #--------------------------------change by MK
         else:
             raise ValueError("Unknown event class: {}".format(self.eventClass))
 
@@ -603,8 +612,16 @@ class allEvents(object):
 
         Data = self.Data
 
-        ### Add first timestep
-        self.addEvent(0, eventClass='Beg')
+        #--------------------------------change by MK
+        if Data['Mass(2)'][0] == 0: #ZAMS merger
+            self.addEvent(0, eventClass='ZAMSmerger')
+            return allEvents
+        elif Data['Mass(1)'][0] == Data['Mass(2)'][0]: # ZAMS overcontact system
+            self.addEvent(0, eventClass='Overcontact')
+        else:
+            ### Add first timestep
+            self.addEvent(0, eventClass='Beg')
+        #--------------------------------change by MK
 
         ### Get all intermediary events
         isMerger = False
@@ -612,7 +629,7 @@ class allEvents(object):
 
             # Ignore first timestep, it's accounted for above
             if ii == 0:
-                continue
+                continue                                                                          
                 # if ending has come, break out
             if isMerger:
                 break

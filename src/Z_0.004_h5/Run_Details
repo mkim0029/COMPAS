@@ -7,14 +7,14 @@ A binary star simulator
 Go to https://compas.readthedocs.io/en/latest/index.html for the online documentation
 Check https://compas.readthedocs.io/en/latest/pages/whats-new.html to see what's new in the latest release
 
-Start generating binaries at Mon Oct  7 12:23:13 2024
+Start generating binaries at Wed Oct  2 15:58:51 2024
 
 Generated 100 of 100 binaries requested
 
-End generating binaries at Mon Oct  7 12:27:55 2024
+End generating binaries at Wed Oct  2 16:03:23 2024
 
-Clock time = 281.288 CPU seconds
-Wall time  = 0000:04:41 (hhhh:mm:ss)
+Clock time = 271.37 CPU seconds
+Wall time  = 0000:04:31 (hhhh:mm:ss)
 
 
 COMMAND LINE OPTIONS
@@ -275,4 +275,4 @@ useFixedUK = FALSE, CALCULATED, BOOL
 fixedRandomSeed = FALSE, CALCULATED, BOOL
 actual-output-path = /home/minjihkim/COMPAS/src, CALCULATED, STRING
 actual-output-container = COMPAS_Output, CALCULATED, STRING
-actual-random-seed = 1728264193, CALCULATED, UNSIGNED_LONG
+actual-random-seed = 1727848731, CALCULATED, UNSIGNED_LONG
