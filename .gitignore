@@ -37,6 +37,7 @@ COMPAS
 *.synctex(busy)
 *.synctex.gz
 *.synctex.gz(busy)
+*.csv
 
 # docs html
 *_build
